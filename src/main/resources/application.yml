@@ -1,1 +1,18 @@
 
+server:
+  port: 8008
+spring:
+  profiles:
+    active: dev-public
+  application:
+    name: airline-booking
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
