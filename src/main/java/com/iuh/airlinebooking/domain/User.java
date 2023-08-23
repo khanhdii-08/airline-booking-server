@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -39,6 +40,12 @@ public class User {
 
     @Column(name = "user_type")
     private String userType;
+
+    @OneToOne(mappedBy = "user")
+    private Passenger passenger;
+
+    @OneToOne(mappedBy = "user")
+    private Employee employee;
 
     public User setId(String id) {
         this.id = id;
