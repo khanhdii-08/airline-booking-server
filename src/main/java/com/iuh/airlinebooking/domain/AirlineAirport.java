@@ -8,52 +8,46 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Set;
-
-@Getter
 @Entity
-@Table(name = "city")
+@Table(name = "airline_airport")
+@Getter
 @NoArgsConstructor
-public class City {
+public class AirlineAirport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "city_code")
-    private String cityCode;
-
-    @Column(name = "city_name")
-    private String cityName;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="city")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airline_id", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Airport> airports;
+    private Airline airline;
 
-    public City setId(String id) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airport_id", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Airport airport;
+
+    public AirlineAirport setId(String id) {
         this.id = id;
         return this;
     }
 
-    public City setCityCode(String cityCode) {
-        this.cityCode = cityCode;
+    public AirlineAirport setAirline(Airline airline) {
+        this.airline = airline;
         return this;
     }
 
-    public City setCityName(String cityName) {
-        this.cityName = cityName;
-        return this;
-    }
-
-    public City setAirports(Set<Airport> airports) {
-        this.airports = airports;
+    public AirlineAirport setAirport(Airport airport) {
+        this.airport = airport;
         return this;
     }
 }
