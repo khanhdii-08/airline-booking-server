@@ -31,7 +31,7 @@ public class AirportServiceImpl implements AirportService {
     public List<AirportDto> getAllAirport() {
         List<Airport> airports = airportRepository.findAll();
 
-        List<String> cityIds = airports.stream().map(airport -> airport.getCity().getId()).collect(Collectors.toList());
+        List<String> cityIds = airports.stream().map(airport -> airport.getCity().getId()).distinct().collect(Collectors.toList());
         List<City> cities = cityRepository.findAllByIdIn(cityIds);
         Map<String, City> cityMap = cities.stream().collect(Collectors.toMap(City::getId, Function.identity()));
 

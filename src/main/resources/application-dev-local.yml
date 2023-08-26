@@ -6,3 +6,11 @@ spring:
     username: airline-booking
     password:
     driver-class-name: org.postgresql.Driver
+
+cors:
+  allowed-origins: 'http://localhost:5173,https://localhost:8081,https://localhost:4200'
+  allowed-methods: '*'
+  allowed-headers: '*'
+  exposed-headers: 'Authorization'
+  allow-credentials: true
+  max-age: 1800

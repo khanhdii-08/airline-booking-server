@@ -1,8 +1,24 @@
 
 
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://satao.db.elephantsql.com:5432/metfmtpv
+#    username: metfmtpv
+#    password: mkggTky5LX-IinIpnOli2b0f_ExefSk3
+#    driver-class-name: org.postgresql.Driver
+#
+#
 spring:
   datasource:
-    url: jdbc:postgresql://satao.db.elephantsql.com:5432/metfmtpv
-    username: metfmtpv
-    password: mkggTky5LX-IinIpnOli2b0f_ExefSk3
+    url: jdbc:postgresql://db.weuqdolzumxagaiprubo.supabase.co:5432/airline-booking
+    username: postgres
+    password: 2bSE-.XUg!Ap@Yz
     driver-class-name: org.postgresql.Driver
+
+cors:
+  allowed-origins: 'http://localhost:5173,https://localhost:8081,https://localhost:4200'
+  allowed-methods: '*'
+  allowed-headers: '*'
+  exposed-headers: 'Authorization'
+  allow-credentials: true
+  max-age: 1800
