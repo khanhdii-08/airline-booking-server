@@ -1,7 +1,10 @@
 package com.iuh.airlinebooking.domain;
 
+import com.iuh.airlinebooking.enumtype.UserType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,14 +35,15 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Size(min = 8, max = 30)
+    @Size(min = 8, max = 100)
     private String password;
 
     @Column(name = "is_activated")
     private Boolean isActivated = false;
 
     @Column(name = "user_type")
-    private String userType;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
     @OneToOne(mappedBy = "user")
     private Passenger passenger;
@@ -76,8 +80,18 @@ public class User {
         return this;
     }
 
-    public void setUserType(String userType) {
+    public User setUserType(UserType userType) {
         this.userType = userType;
+        return this;
     }
 
+    public User setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+        return this;
+    }
+
+    public User setEmployee(Employee employee) {
+        this.employee = employee;
+        return this;
+    }
 }

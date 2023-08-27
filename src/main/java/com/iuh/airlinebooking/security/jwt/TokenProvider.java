@@ -44,7 +44,6 @@ public class TokenProvider {
     }
 
     public String createToken(Map<String, Object> extraClaims, User user) {
-        System.out.println(getSecretKey());
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
