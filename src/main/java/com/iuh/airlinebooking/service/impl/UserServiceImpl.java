@@ -18,21 +18,4 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
     }
-
-//    @Transactional
-//    @Override
-//    public RegisterResDto register(RegisterReqDto req) {
-//        User user = new User();
-//        user.setName(req.getName())
-//                .setPhoneNumber(req.getPhoneNumber())
-//                .setEmail(req.getEmail())
-//                .setPassword(passwordEncoder.encode(req.getPassword()))
-//                .setUserType(RoleEnum.ROLE_USER.toString());
-//        userRepository.save(user);
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("userId", user.getId());
-//        claims.put("role", user.getUserType());
-//        String token = tokenProvider.createToken(claims, user);
-//        return new RegisterResDto().setToken(token);
-//    }
 }
