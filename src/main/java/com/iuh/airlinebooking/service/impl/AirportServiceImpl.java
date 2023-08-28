@@ -10,6 +10,7 @@ import com.iuh.airlinebooking.service.mapper.AirportMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -30,14 +31,17 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public List<AirportDto> getAllAirport() {
         List<Airport> airports = airportRepository.findAll();
-
-        List<String> cityIds = airports.stream().map(airport -> airport.getCity().getId()).distinct().collect(Collectors.toList());
-        List<City> cities = cityRepository.findAllByIdIn(cityIds);
+        List<City> cities = cityRepository.findAllByAirportsIn(airports);
         Map<String, City> cityMap = cities.stream().collect(Collectors.toMap(City::getId, Function.identity()));
+        cities.clear();
 
-        List<AirportDto> airportDtos = airportMapper.toDto(airports);
-        airportDtos.forEach(airportDto -> airportDto.setCityName(cityMap.get(airportDto.getCityId()).getCityName()));
-
+        List<AirportDto> airportDtos = new ArrayList<AirportDto>();
+        airports.forEach(airport -> {
+            AirportDto airportDto = airportMapper.toDto(airport).setCityName(cityMap.get(airport.getCity().getId()).getCityName());
+            airportDtos.add(airportDto);
+        });
+        airports.clear();
+        cityMap.clear();
         return airportDtos;
     }
 }
