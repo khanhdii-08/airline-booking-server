@@ -33,7 +33,7 @@ public class DomainUserDetailsService implements UserDetailsService {
         if (!user.isActivated()) {
             throw new UserNotActivatedException("User was not activated");
         }
-        List<SimpleGrantedAuthority> grantedAuthorities = Arrays.asList(new SimpleGrantedAuthority( user.getUserType()));
+        List<SimpleGrantedAuthority> grantedAuthorities = Arrays.asList(new SimpleGrantedAuthority(user.getUserType().getValue()));
         return new org.springframework.security.core.userdetails.User(user.getId(), user.getPassword(), grantedAuthorities);
     }
 }

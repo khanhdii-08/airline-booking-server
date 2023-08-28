@@ -65,6 +65,11 @@ public class Flight extends AbstractAuditingEntity<String> {
     @ToString.Exclude
     private Airport destinationAirport;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "flight")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<FlightTicket> flightTickets;
+
     @Column(name = "status")
     private String status;
 
@@ -110,6 +115,11 @@ public class Flight extends AbstractAuditingEntity<String> {
 
     public Flight setDestinationAirport(Airport destinationAirport) {
         this.destinationAirport = destinationAirport;
+        return this;
+    }
+
+    public Flight setFlightTickets(List<FlightTicket> flightTickets) {
+        this.flightTickets = flightTickets;
         return this;
     }
 

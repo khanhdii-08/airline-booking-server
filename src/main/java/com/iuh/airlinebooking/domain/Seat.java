@@ -37,6 +37,9 @@ public class Seat {
     @Column(name = "seat_class")
     private String seatClass;
 
+    @Column(name = "status")
+    private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aircraft_id")
     @EqualsAndHashCode.Exclude
@@ -65,6 +68,11 @@ public class Seat {
 
     public Seat setSeatClass(String seatClass) {
         this.seatClass = seatClass;
+        return this;
+    }
+
+    public Seat setStatus(String status) {
+        this.status = status;
         return this;
     }
 
