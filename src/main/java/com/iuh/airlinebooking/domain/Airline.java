@@ -51,11 +51,6 @@ public class Airline {
     @ToString.Exclude
     private List<Flight> flights;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "airline")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private List<AirlineTicket> airlineTickets;
-
     public Airline setId(String id) {
         this.id = id;
         return this;

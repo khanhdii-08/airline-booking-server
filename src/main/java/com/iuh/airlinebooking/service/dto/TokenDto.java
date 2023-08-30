@@ -1,6 +1,7 @@
 package com.iuh.airlinebooking.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +11,20 @@ import lombok.NoArgsConstructor;
 public class TokenDto {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String access_token;
+    @JsonProperty("access_token")
+    private String accessToken;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String refresh_token;
+    @JsonProperty("refresh_token")
+    private String refreshToken;
 
     public TokenDto setAccessToken(String access_token) {
-        this.access_token = access_token;
+        this.accessToken = access_token;
         return this;
     }
 
     public TokenDto setRefreshToken(String refresh_token) {
-        this.refresh_token = refresh_token;
+        this.refreshToken = refresh_token;
         return this;
     }
 }

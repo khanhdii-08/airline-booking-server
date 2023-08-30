@@ -7,8 +7,7 @@ import java.util.stream.Stream;
 public enum SeatClass implements EntityPropertyEnum<String> {
     ECONOMY("ECONOMY"),
     PREMIUM_ECONOMY("PREMIUM_ECONOMY"),
-    BUSINESS("BUSINESS"),
-    FIRST("FIRST");
+    BUSINESS("BUSINESS");
 
     @Setter
     private String value;
