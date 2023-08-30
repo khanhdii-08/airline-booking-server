@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "aircraft")
@@ -43,6 +42,18 @@ public class Aircraft {
     @Column(name = "column_numbers")
     private Integer columnNumbers;
 
+    @Column(name = "economy_number")
+    private Integer economyNumber;
+
+    @Column(name = "premium_economy_number")
+    private Integer premiumEconomyNumber;
+
+    @Column(name = "business_number")
+    private Integer businessNumber;
+
+    @Column(name = "type")
+    private String type;
+
     @ManyToOne
     @JoinColumn(columnDefinition = "airline_id")
     @EqualsAndHashCode.Exclude
@@ -52,12 +63,13 @@ public class Aircraft {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "aircraft")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Seat> seats;
+    private List<Flight> flights;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "aircraft")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Flight> flights;
+    private List<AircraftSeat> aircraftSeats;
+
 
     public Aircraft setId(String id) {
         this.id = id;
@@ -89,18 +101,38 @@ public class Aircraft {
         return this;
     }
 
+    public Aircraft setEconomyNumber(Integer economyNumber) {
+        this.economyNumber = economyNumber;
+        return this;
+    }
+
+    public Aircraft setPremiumEconomyNumber(Integer premiumEconomyNumber) {
+        this.premiumEconomyNumber = premiumEconomyNumber;
+        return this;
+    }
+
+    public Aircraft setBusinessNumber(Integer businessNumber) {
+        this.businessNumber = businessNumber;
+        return this;
+    }
+
+    public Aircraft setSize(String type) {
+        this.type = type;
+        return this;
+    }
+
     public Aircraft setAirline(Airline airline) {
         this.airline = airline;
         return this;
     }
 
-    public Aircraft setSeats(Set<Seat> seats) {
-        this.seats = seats;
+    public Aircraft setFlights(List<Flight> flights) {
+        this.flights = flights;
         return this;
     }
 
-    public Aircraft setFlights(List<Flight> flights) {
-        this.flights = flights;
+    public Aircraft setAircrafts(List<AircraftSeat> aircraftSeats) {
+        this.aircraftSeats = aircraftSeats;
         return this;
     }
 }

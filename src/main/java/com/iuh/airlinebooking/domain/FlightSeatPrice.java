@@ -1,7 +1,10 @@
 package com.iuh.airlinebooking.domain;
 
+import com.iuh.airlinebooking.enumtype.SeatClass;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,24 +18,34 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "airline_ticket")
 @Getter
+@Table(name = "flight_seat_price")
 @NoArgsConstructor
-public class AirlineTicket {
+public class FlightSeatPrice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "airline_id", nullable = false)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Airline airline;
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "infant_price")
+    private Double infantPrice;
+
+    @Column(name = "seat_class")
+    @Enumerated(EnumType.STRING)
+    private SeatClass seatClass;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", nullable = false)
+    @JoinColumn(name = "flight_id", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Ticket ticket;
+    private Flight flight;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seat_id", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Seat seat;
 }

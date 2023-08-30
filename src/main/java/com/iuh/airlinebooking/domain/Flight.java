@@ -42,7 +42,7 @@ public class Flight extends AbstractAuditingEntity<String> {
     private LocalDateTime arrivalTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id")
+    @JoinColumn(name = "airline_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Airline airline;
@@ -68,7 +68,7 @@ public class Flight extends AbstractAuditingEntity<String> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "flight")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<FlightTicket> flightTickets;
+    private List<FlightSeatPrice> flightSeatPrices;
 
     @Column(name = "status")
     private String status;
@@ -115,11 +115,6 @@ public class Flight extends AbstractAuditingEntity<String> {
 
     public Flight setDestinationAirport(Airport destinationAirport) {
         this.destinationAirport = destinationAirport;
-        return this;
-    }
-
-    public Flight setFlightTickets(List<FlightTicket> flightTickets) {
-        this.flightTickets = flightTickets;
         return this;
     }
 

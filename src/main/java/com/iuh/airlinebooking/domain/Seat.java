@@ -1,19 +1,22 @@
 package com.iuh.airlinebooking.domain;
 
+import com.iuh.airlinebooking.enumtype.SeatClass;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "seat")
@@ -26,58 +29,50 @@ public class Seat {
     private String id;
 
     @Column(name = "seats_code")
-    private String seatsCode;
+    private String seatCode;
 
-    @Column(name = "row_number")
-    private Integer rowNumber;
-
-    @Column(name = "column_number")
-    private Integer columnNumber;
+    @Column(name = "seats_name")
+    private String seatName;
 
     @Column(name = "seat_class")
-    private String seatClass;
+    @Enumerated(EnumType.STRING)
+    private SeatClass seatClass;
 
     @Column(name = "status")
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "aircraft_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seat")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Aircraft aircraft;
+    private List<AircraftSeat> aircraftSeats;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seat")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<FlightSeatPrice> flightSeatPrices;
 
     public Seat setId(String id) {
         this.id = id;
         return this;
     }
 
-    public Seat setSeatsCode(String seatsCode) {
-        this.seatsCode = seatsCode;
+    public Seat setSeatName(String seatName) {
+        this.seatName = seatName;
         return this;
     }
 
-    public Seat setRowNumber(Integer rowNumber) {
-        this.rowNumber = rowNumber;
+    public Seat setSeatsCode(String seatCode) {
+        this.seatCode = seatCode;
         return this;
     }
 
-    public Seat setColumnNumber(Integer columnNumber) {
-        this.columnNumber = columnNumber;
-        return this;
-    }
-
-    public Seat setSeatClass(String seatClass) {
+    public Seat setSeatClass(SeatClass seatClass) {
         this.seatClass = seatClass;
         return this;
     }
 
     public Seat setStatus(String status) {
         this.status = status;
-        return this;
-    }
-
-    public Seat setAircraft(Aircraft aircraft) {
-        this.aircraft = aircraft;
         return this;
     }
 }
