@@ -3,6 +3,8 @@ package com.iuh.airlinebooking.web.rest.errors;
 import com.iuh.airlinebooking.security.UserNotActivatedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.exception.ResultMessagesNotificationException;
@@ -28,13 +31,14 @@ public abstract class CustomRestExceptionHandler extends ResponseEntityException
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
         final Object apiError;
-        if(body == null){
+        if (body == null) {
             String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
             apiError = apiErrorCreator.createApiError(request, errorCode, ex.getLocalizedMessage());
-        }else {
+        } else {
             apiError = body;
         }
         return ResponseEntity.status(statusCode).headers(headers).body(apiError);
+
     }
 
     @Override
@@ -42,11 +46,9 @@ public abstract class CustomRestExceptionHandler extends ResponseEntityException
         return handleBindingResult(ex, ex.getBindingResult(), headers, status, request);
     }
 
-    private ResponseEntity<Object> handleBindingResult(Exception ex, BindingResult bindingResult, HttpHeaders headers,
-                                                       HttpStatusCode statusCode, WebRequest request) {
+    private ResponseEntity<Object> handleBindingResult(Exception ex, BindingResult bindingResult, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
         String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode, bindingResult,
-                ex.getMessage());
+        ApiError apiError = apiErrorCreator.createBindingResultApiError(request, errorCode, bindingResult, ex.getMessage());
         return handleExceptionInternal(ex, apiError, headers, statusCode, request);
     }
 
@@ -59,25 +61,34 @@ public abstract class CustomRestExceptionHandler extends ResponseEntityException
         }
     }
 
-    private ResponseEntity<Object> handleResultMessagesNotificationException(ResultMessagesNotificationException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
-        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode, ex.getResultMessages(),
-                ex.getMessage());
-        return handleExceptionInternal(ex, apiError, headers, status, request);
-    }
-
-    @ExceptionHandler({ResourceNotFoundException.class})
-    public ResponseEntity<Object> handleResourceNotFotFoundException(ResourceNotFoundException ex, WebRequest request){
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         return handleResultMessagesNotificationException(ex, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleSystemError(Exception ex, WebRequest request){
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
+        return handleResultMessagesNotificationException(ex, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
+    private ResponseEntity<Object> handleResultMessagesNotificationException(ResultMessagesNotificationException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String errorCode = exceptionCodeResolver.resolveExceptionCode(ex);
+        ApiError apiError = apiErrorCreator.createResultMessagesApiError(request, errorCode, ex.getResultMessages(), ex.getMessage());
+        return handleExceptionInternal(ex, apiError, headers, status, request);
+    }
+
+    @ExceptionHandler({OptimisticLockingFailureException.class, PessimisticLockingFailureException.class})
+    public ResponseEntity<Object> handleLockingFailureException(Exception ex, WebRequest request) {
+        return handleExceptionInternal(ex, null, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleSystemError(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, null, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     @ExceptionHandler({UserNotActivatedException.class})
-    public ResponseEntity<Object> handleUserNotActivatedException(UserNotActivatedException ex, WebRequest request){
+    public ResponseEntity<Object> handleUserNotActivatedException(UserNotActivatedException ex, WebRequest request) {
         return handleExceptionInternal(ex, null, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 }

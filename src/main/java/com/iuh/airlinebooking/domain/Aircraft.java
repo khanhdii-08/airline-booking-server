@@ -54,7 +54,7 @@ public class Aircraft {
     @Column(name = "type")
     private String type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "airline_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

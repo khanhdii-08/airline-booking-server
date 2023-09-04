@@ -18,20 +18,20 @@ public class ErrorHandleConfig {
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 
         map.put("ResourceNotFoundException"              , MessageKeys.E_EX_FW_404);
-//        map.put("HttpRequestMethodNotSupportedException" , MessageKeys.E_EX_FW_6001);
-//        map.put("MediaTypeNotAcceptableException"        , MessageKeys.E_EX_FW_6002);
-//        map.put("HttpMediaTypeNotSupportedException"     , MessageKeys.E_EX_FW_6003);
-//        map.put("MethodArgumentNotValidException"        , MessageKeys.E_EX_FW_7001);
-//        map.put("BindException"                          , MessageKeys.E_EX_FW_7002);
-//        map.put("JsonParseException"                     , MessageKeys.E_EX_FW_7003);
-//        map.put("UnrecognizedPropertyException"          , MessageKeys.E_EX_FW_7004);
-//        map.put("JsonMappingException"                   , MessageKeys.E_EX_FW_7005);
+        map.put("HttpRequestMethodNotSupportedException" , MessageKeys.E_EX_FW_6001);
+        map.put("MediaTypeNotAcceptableException"        , MessageKeys.E_EX_FW_6002);
+        map.put("HttpMediaTypeNotSupportedException"     , MessageKeys.E_EX_FW_6003);
+        map.put("MethodArgumentNotValidException"        , MessageKeys.E_EX_FW_7001);
+        map.put("BindException"                          , MessageKeys.E_EX_FW_7002);
+        map.put("JsonParseException"                     , MessageKeys.E_EX_FW_7003);
+        map.put("UnrecognizedPropertyException"          , MessageKeys.E_EX_FW_7004);
+        map.put("JsonMappingException"                   , MessageKeys.E_EX_FW_7005);
         map.put("TypeMismatchException"                  , MessageKeys.E_EX_FW_400);
-//        map.put("BusinessException"                      , MessageKeys.E_EX_FW_8001);
-//        map.put("OptimisticLockingFailureException"      , MessageKeys.E_EX_FW_8002);
-//        map.put("PessimisticLockingFailureException"     , MessageKeys.E_EX_FW_8002);
-//        map.put("DataAccessException"                    , MessageKeys.E_EX_FW_9002);
-        map.put("UserNotActivatedException"                  , MessageKeys.E_EX_FW_401);
+        map.put("BusinessException"                      , MessageKeys.E_EX_FW_8001);
+        map.put("OptimisticLockingFailureException"      , MessageKeys.E_EX_FW_8002);
+        map.put("PessimisticLockingFailureException"     , MessageKeys.E_EX_FW_8002);
+        map.put("DataAccessException"                    , MessageKeys.E_EX_FW_9002);
+        map.put("UserNotActivatedException"              , MessageKeys.E_EX_FW_401);
 
 
         exceptionCodeResolver.setExceptionMappings(map);
