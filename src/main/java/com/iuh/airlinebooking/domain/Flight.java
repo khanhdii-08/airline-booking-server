@@ -38,29 +38,32 @@ public class Flight extends AbstractAuditingEntity<String> {
     @Column(name = "departure_time")
     private LocalDateTime departureTime;
 
+    @Column(name = "return_time")
+    private LocalDateTime returnTime;
+
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "airline_id")
+    @JoinColumn(name = "airline_id", nullable=false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Airline airline;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "aircraft_id")
+    @JoinColumn(name = "aircraft_id", nullable=false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Aircraft aircraft;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "source_airport_id")
+    @JoinColumn(name = "source_airport_id", nullable=false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Airport sourceAirport;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "destination_airport_id")
+    @JoinColumn(name = "destination_airport_id", nullable=false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Airport destinationAirport;
@@ -90,6 +93,11 @@ public class Flight extends AbstractAuditingEntity<String> {
 
     public Flight setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
+        return this;
+    }
+
+    public Flight setReturnTime(LocalDateTime returnTime) {
+        this.returnTime = returnTime;
         return this;
     }
 
