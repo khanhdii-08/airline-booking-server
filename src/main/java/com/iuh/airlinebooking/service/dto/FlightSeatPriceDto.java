@@ -10,11 +10,13 @@ import lombok.NoArgsConstructor;
 public class FlightSeatPriceDto {
     private String id;
 
-    private Double price;
+    private Double adultsPrice;
+
+    private Double childrenPrice;
 
     private Double infantPrice;
 
-    private String sateClass;
+    private String seatClass;
 
     private String flightId;
 
@@ -25,8 +27,13 @@ public class FlightSeatPriceDto {
         return this;
     }
 
-    public FlightSeatPriceDto setPrice(Double price) {
-        this.price = price;
+    public FlightSeatPriceDto setAdultsPrice(Double adultsPrice) {
+        this.adultsPrice = adultsPrice;
+        return this;
+    }
+
+    public FlightSeatPriceDto setChildrenPrice(Double childrenPrice) {
+        this.childrenPrice = childrenPrice;
         return this;
     }
 
@@ -35,8 +42,8 @@ public class FlightSeatPriceDto {
         return this;
     }
 
-    public FlightSeatPriceDto setSateClass(String sateClass) {
-        this.sateClass = sateClass;
+    public FlightSeatPriceDto setSeatClass(String seatClass) {
+        this.seatClass = seatClass;
         return this;
     }
 

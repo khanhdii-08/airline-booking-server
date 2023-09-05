@@ -17,7 +17,7 @@ public interface FlightRepository extends JpaRepository<Flight, String> {
             " where (f.sourceAirport.id =:sourceAirportId " +
             " and f.destinationAirport.id =:destinationAirportId " +
             " and date(f.departureTime) =:departureDate " +
-            " and ( coalesce(:returnDate) is null or date(f.returnTime) =:returnDate)  " +
+            " and ((coalesce(:returnDate) is null and f.returnTime is null) or (date(f.returnTime) =:returnDate))" +
             " and s.seatClass = :seatClass) ")
     List<Flight> findAllByCriteria(String sourceAirportId, String destinationAirportId, LocalDate departureDate,
                                    LocalDate returnDate, SeatClass seatClass);

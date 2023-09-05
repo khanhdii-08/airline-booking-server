@@ -43,13 +43,25 @@ public class FlightDto {
 
     private String sourceAirportName;
 
+    private String sourceCityId;
+
+    private String sourceCityCode;
+
+    private String sourceCityName;
+
     private String destinationAirportId;
 
     private String destinationAirportCode;
 
     private String destinationAirportName;
 
-    private FlightSeatPriceDto priceDto;
+    private String destinationCityId;
+
+    private String destinationCityCode;
+
+    private String destinationCityName;
+
+    private FlightSeatPriceDto seatPriceDto;
 
     private String status;
 
@@ -153,8 +165,38 @@ public class FlightDto {
         return this;
     }
 
-    public FlightDto setPriceDto(FlightSeatPriceDto priceDto) {
-        this.priceDto = priceDto;
+    public FlightDto setSeatPriceDto(FlightSeatPriceDto seatPriceDto) {
+        this.seatPriceDto = seatPriceDto;
+        return this;
+    }
+
+    public FlightDto setSourceCityId(String sourceCityId) {
+        this.sourceCityId = sourceCityId;
+        return this;
+    }
+
+    public FlightDto setSourceCityCode(String sourceCityCode) {
+        this.sourceCityCode = sourceCityCode;
+        return this;
+    }
+
+    public FlightDto setSourceCityName(String sourceCityName) {
+        this.sourceCityName = sourceCityName;
+        return this;
+    }
+
+    public FlightDto setDestinationCityId(String destinationCityId) {
+        this.destinationCityId = destinationCityId;
+        return this;
+    }
+
+    public FlightDto setDestinationCityCode(String destinationCityCode) {
+        this.destinationCityCode = destinationCityCode;
+        return this;
+    }
+
+    public FlightDto setDestinationCityName(String destinationCityName) {
+        this.destinationCityName = destinationCityName;
         return this;
     }
 }

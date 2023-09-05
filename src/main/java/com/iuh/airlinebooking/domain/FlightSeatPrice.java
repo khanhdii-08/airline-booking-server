@@ -27,8 +27,11 @@ public class FlightSeatPrice {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "adult_price")
+    private Double adultsPrice;
+
+    @Column(name = "children_price")
+    private Double childrenPrice;
 
     @Column(name = "infant_price")
     private Double infantPrice;
@@ -48,4 +51,39 @@ public class FlightSeatPrice {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Seat seat;
+
+    public FlightSeatPrice setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public FlightSeatPrice setAdultsPrice(Double adultsPrice) {
+        this.adultsPrice = adultsPrice;
+        return this;
+    }
+
+    public FlightSeatPrice setChildrenPrice(Double childrenPrice) {
+        this.childrenPrice = childrenPrice;
+        return this;
+    }
+
+    public FlightSeatPrice setInfantPrice(Double infantPrice) {
+        this.infantPrice = infantPrice;
+        return this;
+    }
+
+    public FlightSeatPrice setSeatClass(SeatClass seatClass) {
+        this.seatClass = seatClass;
+        return this;
+    }
+
+    public FlightSeatPrice setFlight(Flight flight) {
+        this.flight = flight;
+        return this;
+    }
+
+    public FlightSeatPrice setSeat(Seat seat) {
+        this.seat = seat;
+        return this;
+    }
 }
