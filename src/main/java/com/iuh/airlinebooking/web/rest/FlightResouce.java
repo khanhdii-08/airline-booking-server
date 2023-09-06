@@ -24,7 +24,6 @@ public class FlightResouce extends BaseResource {
     public ResponseEntity<?> getListByCondition(@RequestParam(name = "sourceAirportId") String sourceAirportId,
                                                 @RequestParam(name = "destinationAirportId") String destinationAirportId,
                                                 @RequestParam(name = "departureDate") LocalDate departureDate,
-                                                @RequestParam(name = "returnDate", required = false) LocalDate returnDate,
                                                 @RequestParam(name = "seatClass") String seatClass,
                                                 @RequestParam(name = "numAdults") Integer numAdults,
                                                 @RequestParam(name = "numChildren") Integer numChildren,
@@ -34,7 +33,6 @@ public class FlightResouce extends BaseResource {
         criteria.setSourceAirportId(sourceAirportId);
         criteria.setDestinationAirportId(destinationAirportId);
         criteria.setDepartureDate(departureDate);
-        criteria.setReturnDate(returnDate);
         criteria.setSeatClass(seatClass);
         criteria.setNumAdults(numAdults);
         criteria.setNumChildren(numChildren);

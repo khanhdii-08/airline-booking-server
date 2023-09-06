@@ -19,8 +19,6 @@ public class FlightDto {
 
     private LocalDateTime departureTime;
 
-    private LocalDateTime returnTime;
-
     private LocalDateTime arrivalTime;
 
     private String airlineId;
@@ -82,11 +80,6 @@ public class FlightDto {
 
     public FlightDto setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
-        return this;
-    }
-
-    public FlightDto setReturnTime(LocalDateTime returnTime) {
-        this.returnTime = returnTime;
         return this;
     }
 

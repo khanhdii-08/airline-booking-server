@@ -16,8 +16,6 @@ public class FlightCriteria {
 
     private LocalDate departureDate;
 
-    private LocalDate returnDate;
-
     @Query(type = Query.Type.EQUAL)
     private String seatClass;
 
