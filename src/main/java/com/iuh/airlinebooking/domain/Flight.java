@@ -38,9 +38,6 @@ public class Flight extends AbstractAuditingEntity<String> {
     @Column(name = "departure_time")
     private LocalDateTime departureTime;
 
-    @Column(name = "return_time")
-    private LocalDateTime returnTime;
-
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
 
@@ -93,11 +90,6 @@ public class Flight extends AbstractAuditingEntity<String> {
 
     public Flight setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
-        return this;
-    }
-
-    public Flight setReturnTime(LocalDateTime returnTime) {
-        this.returnTime = returnTime;
         return this;
     }
 

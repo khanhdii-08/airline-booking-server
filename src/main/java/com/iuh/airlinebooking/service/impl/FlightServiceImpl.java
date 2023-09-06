@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
     public List<FlightDto> getListByCondition(FlightCriteria criteria) {
 
         List<Flight> flights = flightRepository.findAllByCriteria(criteria.getSourceAirportId(), criteria.getDestinationAirportId(),
-                criteria.getDepartureDate(), criteria.getReturnDate(), SeatClass.valueOf(criteria.getSeatClass()));
+                criteria.getDepartureDate(), SeatClass.valueOf(criteria.getSeatClass()));
         List<Airline> airlines = airlineRepository.findAllByFlightsIn(flights);
         Map<String, Airline> airlineMap = airlines.stream().collect(Collectors.toMap(Airline::getId, Function.identity()));
         airlines.clear();

@@ -51,6 +51,11 @@ public class Airline {
     @ToString.Exclude
     private List<Flight> flights;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="airline")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<ServiceOption> serviceOptions;
+
     public Airline setId(String id) {
         this.id = id;
         return this;
@@ -83,6 +88,16 @@ public class Airline {
 
     public Airline setFlights(List<Flight> flights) {
         this.flights = flights;
+        return this;
+    }
+
+    public Airline setAircrafts(Set<Aircraft> aircrafts) {
+        this.aircrafts = aircrafts;
+        return this;
+    }
+
+    public Airline setServiceOptions(List<ServiceOption> serviceOptions) {
+        this.serviceOptions = serviceOptions;
         return this;
     }
 }
